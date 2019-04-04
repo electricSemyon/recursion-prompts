@@ -23,6 +23,18 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  function iter(acc, [head, ...tail]) {
+    if (!head)
+      return acc;
+    
+    const newHead = Array.isArray(head)
+      ? iter(acc, head)
+      : head + acc
+
+    return iter(newHead, tail);
+  }
+
+  return iter(0, array)
 };
 
 // 4. Check if a number is even.
